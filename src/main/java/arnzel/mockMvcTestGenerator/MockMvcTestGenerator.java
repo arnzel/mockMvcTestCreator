@@ -2,7 +2,6 @@ package arnzel.mockMvcTestGenerator;
 
 import arnzel.mockMvcTestGenerator.exceptions.IllegalClassException;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 public class MockMvcTestGenerator {
   
