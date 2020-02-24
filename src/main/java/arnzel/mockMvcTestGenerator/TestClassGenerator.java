@@ -7,12 +7,15 @@ import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import java.io.File;
+import java.lang.reflect.Field;
 import javax.lang.model.element.Modifier;
 import org.springframework.test.web.servlet.MockMvc;
 
 public class TestClassGenerator {
   
   private final String TEST_CLASS_NAME_POSTFIX = "Test";
+  
+  private final String MOCK_MVC_VARIABLE_NAME = "mockMvc";
   
   private final TestClassWriter testClassWriter;
   
@@ -29,19 +32,34 @@ public class TestClassGenerator {
   TypeSpec getTypeSpec(Class clazz){
     return classBuilder(getTestClassName(clazz))
         .addField(getMockMvcFieldSpec())
-        .addMethod(getDefaultConstructorSpec())
+        .addField(getControllerFieldSpec(clazz))
+        .addMethod(getDefaultConstructorSpec(clazz))
         .build();
   }
   
-  private MethodSpec getDefaultConstructorSpec(){ 
+  private MethodSpec getDefaultConstructorSpec(Class clazz){ 
+    //TODO Initialize mockMvc Variable correctly
     return constructorBuilder()
         .addModifiers(Modifier.PUBLIC)
+        .addStatement("this.$N = new $N()",clazz.getSimpleName(),clazz.getSimpleName())
+        .addStatement("this.$N = $N", MOCK_MVC_VARIABLE_NAME, "null")
+        .build();
+  }
+  
+/*  private String generateMockMvcInitialisationStatement(){
+    
+  }*/
+  
+  private FieldSpec getControllerFieldSpec(Class clazz){
+    return FieldSpec
+        .builder(clazz, clazz.getSimpleName())
+        .addModifiers(Modifier.PRIVATE)
         .build();
   }
 
   private FieldSpec getMockMvcFieldSpec() {
     return FieldSpec
-        .builder(MockMvc.class, "mockMvc")
+        .builder(MockMvc.class, MOCK_MVC_VARIABLE_NAME)
         .addModifiers(Modifier.PRIVATE)
         .build();
   }
