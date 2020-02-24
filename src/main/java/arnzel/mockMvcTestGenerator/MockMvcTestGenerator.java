@@ -10,7 +10,7 @@ public class MockMvcTestGenerator {
   private final TestClassGenerator testClassGenerator;
 
   public MockMvcTestGenerator() {
-    this.testClassGenerator = new TestClassGenerator(testClassWriter);
+    this.testClassGenerator = new TestClassGenerator();
   }
 
   public File generateMockMvcTest(Class clazz){

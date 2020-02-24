@@ -10,8 +10,7 @@ public class TestClassWriter {
   private final String TEST_CLASS_PATH = "generated/src/test/java/";
 
   private final String TEST_CLASS_NAME_POSTFIX = "Test";
-
-
+  
   File writeTestClass(Class clazz){
     String testClassName= getTestClassName(clazz);
     String testClassPackageName = getTestClassPackage(clazz);
