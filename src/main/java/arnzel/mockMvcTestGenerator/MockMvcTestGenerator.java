@@ -1,14 +1,30 @@
 package arnzel.mockMvcTestGenerator;
 
+
 import arnzel.mockMvcTestGenerator.exceptions.IllegalClassException;
+import java.io.File;
 import org.springframework.stereotype.Controller;
 
 public class MockMvcTestGenerator {
   
-  public void generateMockMvcTest(Class clazz){
-    if(isClassAnnotatedWith(clazz,Controller.class)){
-      
-    }else{
+  private final TestClassGenerator testClassGenerator;
+
+  public MockMvcTestGenerator() {
+    this.testClassGenerator = new TestClassGenerator();
+  }
+
+  public File generateMockMvcTest(Class clazz){
+    validateClass(clazz);
+    return writeTestClass(clazz);
+  }
+  
+  private File writeTestClass(Class clazz){
+    return testClassGenerator
+        .generateTestClass(clazz);
+  }
+  
+  private void validateClass(Class clazz){
+    if(!isClassAnnotatedWith(clazz,Controller.class)){
       throw new IllegalClassException(clazz);
     }
   }

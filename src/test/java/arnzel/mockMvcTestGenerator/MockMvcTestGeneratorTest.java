@@ -1,9 +1,12 @@
 package arnzel.mockMvcTestGenerator;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import arnzel.mockMvcTestGenerator.exceptions.IllegalClassException;
+import fixtures.controllers.MethodMappingController;
 import fixtures.otherClasses.NonControllerClass;
+import java.io.File;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +17,13 @@ class MockMvcTestGeneratorTest {
   @BeforeEach
   void setUp() {
     mockMvcTestGeneratorUnderTest = new MockMvcTestGenerator();
+  }
+
+  @Test
+  void generateTestForMethodMapping(){
+    File testClassFile =
+        mockMvcTestGeneratorUnderTest.generateMockMvcTest(MethodMappingController.class);
+    assertThat(testClassFile).isNotNull();
   }
   
   @Test
