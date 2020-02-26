@@ -1,4 +1,4 @@
-package arnzel.mockMvcTestGenerator.parsers;
+package arnzel.mockMvcTestGenerator;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

@@ -4,5 +4,5 @@ import com.squareup.javapoet.TypeSpec;
 
 public interface MockMvcClassGenerator {
 
-  public TypeSpec createTestClass(Class clazz,String testClassName);
+  public TypeSpec.Builder createTestClass(Class clazz,String testClassName);
 }

@@ -13,12 +13,11 @@ public class MockMvcStandAloneSetupClassGenerator implements MockMvcClassGenerat
 
   private final String MOCK_MVC_VARIABLE_NAME = "mockMvc";
 
-  public TypeSpec createTestClass(Class clazz,String testClassName){
+  public TypeSpec.Builder createTestClass(Class clazz,String testClassName){
     return classBuilder(testClassName)
         .addField(getMockMvcFieldSpec())
         .addField(getControllerFieldSpec(clazz))
-        .addMethod(getDefaultConstructorSpec(clazz))
-        .build();
+        .addMethod(getDefaultConstructorSpec(clazz));
   }
 
   private FieldSpec getMockMvcFieldSpec() {

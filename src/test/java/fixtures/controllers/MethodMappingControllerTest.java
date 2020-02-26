@@ -12,4 +12,7 @@ class MethodMappingControllerTest {
     this.MethodMappingController = new MethodMappingController();
     this.mockMvc = MockMvcBuilders.standaloneSetup(new MethodMappingController()).build();
   }
+
+  public void getMapping() {
+  }
 }

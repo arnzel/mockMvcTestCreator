@@ -1,31 +1,33 @@
-package arnzel.mockMvcTestGenerator.parsers;
+package arnzel.mockMvcTestGenerator.requestMapping;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import arnzel.mockMvcTestGenerator.requestMapping.RequestMappingParser;
 import fixtures.controllers.MethodMappingController;
 import fixtures.otherClasses.NonControllerClass;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-class ClassParserTest {
+class RequestMappingParserTest {
 
-  private ClassParser classParserUnderTest;
+  private RequestMappingParser requestMappingParser;
 
   @BeforeEach
   void setUp() {
-    classParserUnderTest = new ClassParser();
+    requestMappingParser = new RequestMappingParser();
   }
 
   @Test
   void classHasMethodWithAnnotation() {
-    
+
     // Run the test
-    final List<Method> result = classParserUnderTest.findAnnotatedMethods(
-        MethodMappingController.class, RequestMapping.class);
+    final Collection<Method> result = requestMappingParser.getRequestMappings(
+        MethodMappingController.class);
 
     // Verify the results
     assertThat(result.size()).isEqualTo(1);
@@ -35,8 +37,8 @@ class ClassParserTest {
   void classHasNotMethodWithAnnotation() {
 
     // Run the test
-    final List<Method> result = classParserUnderTest.findAnnotatedMethods(
-        NonControllerClass.class, RequestMapping.class);
+    final Collection<Method> result = requestMappingParser.getRequestMappings(
+        NonControllerClass.class);
 
     // Verify the results
     assertThat(result.size()).isEqualTo(0);
