@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class TestClassWriter {
 
-  private final String TEST_CLASS_PATH = "generated/src/test/java/";
+  private final String TEST_CLASS_PATH = "src/test/java/";
   
   File writeTestClass(Class clazz,TypeSpec testClassTypeSpec){
     String testClassPackageName = getTestClassPackage(clazz);

@@ -1,6 +1,7 @@
 package fixtures.controllers;
 
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 class MethodMappingControllerTest {
   private MockMvc mockMvc;
@@ -9,6 +10,6 @@ class MethodMappingControllerTest {
 
   public MethodMappingControllerTest() {
     this.MethodMappingController = new MethodMappingController();
-    this.mockMvc = null;
+    this.mockMvc = MockMvcBuilders.standaloneSetup(new MethodMappingController()).build();
   }
 }
