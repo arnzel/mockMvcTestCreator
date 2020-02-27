@@ -5,6 +5,7 @@ import com.squareup.javapoet.TypeSpec;
 import java.lang.reflect.Method;
 import java.util.Set;
 import javax.lang.model.element.Modifier;
+import org.junit.jupiter.api.Test;
 
 public class RequestMappingTestGenerator {
   
@@ -19,12 +20,13 @@ public class RequestMappingTestGenerator {
         requestMappingParser.getRequestMappings(clazz);
     methods
         .stream()
-        .forEach(method -> createTest(testClassBuilder,method));
+        .forEach(method -> createTestMethod(testClassBuilder,method));
   }
   
-  private void createTest(TypeSpec.Builder testClassBuilder, Method method){
+  private void createTestMethod(TypeSpec.Builder testClassBuilder, Method method){
     MethodSpec methodSpec = MethodSpec.methodBuilder(method.getName())
         .addModifiers(Modifier.PUBLIC)
+        .addAnnotation(Test.class)
         .returns(void.class)
         .build();
     testClassBuilder.addMethod(methodSpec);

@@ -1,5 +1,6 @@
 package fixtures.controllers;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -13,6 +14,7 @@ class MethodMappingControllerTest {
     this.mockMvc = MockMvcBuilders.standaloneSetup(new MethodMappingController()).build();
   }
 
+  @Test
   public void getMapping() {
   }
 }
