@@ -3,15 +3,12 @@ package arnzel.mockMvcTestGenerator.requestMapping;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import arnzel.mockMvcTestGenerator.requestMapping.RequestMappingParser;
 import fixtures.controllers.MethodMappingController;
 import fixtures.otherClasses.NonControllerClass;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 class RequestMappingParserTest {
 
@@ -26,7 +23,7 @@ class RequestMappingParserTest {
   void classHasMethodWithAnnotation() {
 
     // Run the test
-    final Collection<Method> result = requestMappingParser.getRequestMappings(
+    final Collection<Method> result = requestMappingParser.getMethodsAnnotatedWithRequestMapping(
         MethodMappingController.class);
 
     // Verify the results
@@ -37,7 +34,7 @@ class RequestMappingParserTest {
   void classHasNotMethodWithAnnotation() {
 
     // Run the test
-    final Collection<Method> result = requestMappingParser.getRequestMappings(
+    final Collection<Method> result = requestMappingParser.getMethodsAnnotatedWithRequestMapping(
         NonControllerClass.class);
 
     // Verify the results

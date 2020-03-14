@@ -15,7 +15,7 @@ public class RequestMappingParser {
     this.classParser = new ClassParser();
   }
   
-  public Set<Method> getRequestMappings(Class<?> clazz){
+  public Set<Method> getMethodsAnnotatedWithRequestMapping(Class<?> clazz){
     List<Method> methods =
         classParser.findAnnotatedMethods(clazz,RequestMapping.class);
     return methods
