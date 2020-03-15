@@ -10,7 +10,7 @@ import java.io.File;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class MockMvcTestGeneratorClass {
+class MockMvcTestGeneratorClassTest {
 
   private MockMvcTestGenerator mockMvcTestGeneratorUnderTest;
 
