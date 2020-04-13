@@ -9,7 +9,9 @@ import java.util.Set;
 import javax.lang.model.element.Modifier;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 public class RequestMappingTestGenerator {
@@ -35,7 +37,8 @@ public class RequestMappingTestGenerator {
         .addStatement(
                 getPerformRequestString(method),
                 MockMvcRequestBuilders.class,
-                MediaType.class)
+                MediaType.class,
+                MockMvcResultHandlers.class)
         .returns(void.class)
         .addException(Exception.class)
         .build();
@@ -46,7 +49,9 @@ public class RequestMappingTestGenerator {
     RequestMapping requestMapping =
         method.getAnnotation(RequestMapping.class);
     return format(
-        "mockMvc.perform( $T.get(%s).accept($T.APPLICATION_JSON))",
+        "mockMvc" +
+                ".perform( $T.get(%s).accept($T.APPLICATION_JSON))" +
+                ".andDo($T.print())",
         "\"" + requestMapping.value()[0] + "\"");
   }
 
