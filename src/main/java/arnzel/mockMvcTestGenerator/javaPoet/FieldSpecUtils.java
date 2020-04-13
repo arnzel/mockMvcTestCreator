@@ -12,6 +12,7 @@ public class FieldSpecUtils {
         return FieldSpec
                 .builder(clazz, fieldName)
                 .addModifiers(Modifier.PRIVATE)
+                .addModifiers(Modifier.FINAL)
                 .build();
     }
 }

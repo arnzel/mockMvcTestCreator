@@ -8,6 +8,8 @@ import java.lang.reflect.Method;
 import java.util.Set;
 import javax.lang.model.element.Modifier;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 public class RequestMappingTestGenerator {
@@ -30,7 +32,10 @@ public class RequestMappingTestGenerator {
     MethodSpec methodSpec = MethodSpec.methodBuilder(method.getName())
         .addModifiers(Modifier.PUBLIC)
         .addAnnotation(Test.class)
-        .addStatement(getPerformRequestString(method))
+        .addStatement(
+                getPerformRequestString(method),
+                MockMvcRequestBuilders.class,
+                MediaType.class)
         .returns(void.class)
         .addException(Exception.class)
         .build();
@@ -41,7 +46,7 @@ public class RequestMappingTestGenerator {
     RequestMapping requestMapping =
         method.getAnnotation(RequestMapping.class);
     return format(
-        "mockMvc.perform( MockMvcRequestBuilders.get(%s).accept(MediaType.APPLICATION_JSON))",
+        "mockMvc.perform( $T.get(%s).accept($T.APPLICATION_JSON))",
         "\"" + requestMapping.value()[0] + "\"");
   }
 

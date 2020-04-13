@@ -3,15 +3,20 @@ package arnzel.mockMvcTestGenerator.mockMvc;
 import static arnzel.mockMvcTestGenerator.javaPoet.FieldSpecUtils.getPrivateFieldSpec;
 import static com.squareup.javapoet.MethodSpec.constructorBuilder;
 import static com.squareup.javapoet.TypeSpec.classBuilder;
+import static java.beans.Introspector.decapitalize;
 
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import javax.lang.model.element.Modifier;
+
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.beans.Introspector;
 
 public class MockMvcStandAloneSetupClassGenerator implements MockMvcClassGenerator {
 
@@ -21,27 +26,14 @@ public class MockMvcStandAloneSetupClassGenerator implements MockMvcClassGenerat
 
   private final String MOCK_MVC_REQUEST_BUILDERS_VARIABLE_NAME = "mockMvcRequestBuilders";
 
+  private final String MEDIA_TYPE_APPLICATION_JSON_VARIABLE_NAME = "mediaTypeApplicationJson";
+
   public TypeSpec.Builder createTestClass(Class clazz,String testClassName){
     return classBuilder(testClassName)
         .addField(getMockMvcFieldSpec())
         .addField(getControllerFieldSpec(clazz))
-            .addField(getMockMvcBuildersFieldSpec())
-            .addField(getMockMvcRequestBuildersFieldSpec())
         .addMethod(getDefaultConstructorSpec(clazz));
   }
-
-  private FieldSpec getMockMvcRequestBuildersFieldSpec() {
-    return getPrivateFieldSpec(
-            MockMvcRequestBuilders.class,
-            MOCK_MVC_REQUEST_BUILDERS_VARIABLE_NAME);
-
-  }
-  private FieldSpec getMockMvcBuildersFieldSpec() {
-    return getPrivateFieldSpec(
-            MockMvcBuilders.class,
-            MOCK_MVC_BUILDERS_VARIABLE_NAME);
-  }
-
 
   private FieldSpec getMockMvcFieldSpec() {
     return getPrivateFieldSpec(
@@ -49,25 +41,26 @@ public class MockMvcStandAloneSetupClassGenerator implements MockMvcClassGenerat
   }
 
   private FieldSpec getControllerFieldSpec(Class clazz){
-    return FieldSpec
-        .builder(clazz, clazz.getSimpleName())
-        .addModifiers(Modifier.PRIVATE)
-        .build();
+    return getPrivateFieldSpec(
+            clazz, getClassVariableName(clazz));
   }
 
   private MethodSpec getDefaultConstructorSpec(Class clazz){
     return constructorBuilder()
         .addModifiers(Modifier.PUBLIC)
-        .addStatement("this.$N = new $N()",clazz.getSimpleName(),clazz.getSimpleName())
+        .addStatement("this.$N = new $N()",getClassVariableName(clazz),clazz.getSimpleName())
         .addStatement(generateMockMvcStandAloneSetupStatement(),
-            MOCK_MVC_VARIABLE_NAME,
-                MOCK_MVC_BUILDERS_VARIABLE_NAME,
-                clazz.getSimpleName())
+                MockMvcBuilders.class,
+                clazz)
         .build();
   }
 
+  private String getClassVariableName(Class clazz){
+    return decapitalize(clazz.getSimpleName());
+  }
+
   private String generateMockMvcStandAloneSetupStatement(){
-    return "this.$N = $N.standaloneSetup(new $N()).build()";
+    return "this." + MOCK_MVC_VARIABLE_NAME +" = $T.standaloneSetup(new $T()).build()";
   }
 
 }
