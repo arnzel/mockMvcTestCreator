@@ -18,7 +18,7 @@ public class ClassUtils {
                 + getClassName(file));
     }
 
-    private static String getClassName(File file) throws FileNotFoundException {
+    private static String getClassName(File file)  {
         String fileName = file.getName();
         return fileName.substring(0,fileName.indexOf('.'));
     }

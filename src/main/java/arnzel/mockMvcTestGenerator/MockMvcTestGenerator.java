@@ -5,12 +5,18 @@ import arnzel.mockMvcTestGenerator.exceptions.IllegalClassException;
 import java.io.File;
 import org.springframework.stereotype.Controller;
 
+import static arnzel.mockMvcTestGenerator.util.ClassUtils.getClassFromFile;
+
 public class MockMvcTestGenerator {
   
   private final TestClassGenerator testClassGenerator;
 
   public MockMvcTestGenerator() {
     this.testClassGenerator = new TestClassGenerator();
+  }
+
+  public File generateMockMvcTest(File file) throws Exception {
+    return generateMockMvcTest(getClassFromFile(file));
   }
 
   public File generateMockMvcTest(Class clazz){
