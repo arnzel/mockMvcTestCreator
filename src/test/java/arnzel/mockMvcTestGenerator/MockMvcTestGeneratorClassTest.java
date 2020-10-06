@@ -34,14 +34,14 @@ class MockMvcTestGeneratorClassTest {
   @Test
   void generateTestForMethodMapping() throws IOException {
     // given
-    givenClassGeneration(MethodMappingController.class);
+    File classGenerationFile = givenClassGeneration(MethodMappingController.class);
 
     // when
     File testClassFile =
         mockMvcTestGeneratorUnderTest.generateMockMvcTest(MethodMappingController.class);
 
     // then
-    assertThat(testClassFile).isNotNull();
+    assertThat(testClassFile).isEqualTo(classGenerationFile);
   }
   
   @Test
@@ -53,9 +53,10 @@ class MockMvcTestGeneratorClassTest {
  
   }
 
-  private void givenClassGeneration(Class clazz) throws IOException {
+  private File givenClassGeneration(Class clazz) throws IOException {
     File file = Files.createTempFile("prefix","suffix").toFile();
     Mockito.when(testClassGenerator.generateTestClass(clazz))
             .thenReturn(file);
+    return file;
   }
 }
