@@ -11,8 +11,8 @@ public class MockMvcTestGenerator {
   
   private final TestClassGenerator testClassGenerator;
 
-  public MockMvcTestGenerator() {
-    this.testClassGenerator = new TestClassGenerator();
+  public MockMvcTestGenerator(TestClassGenerator testClassGenerator) {
+    this.testClassGenerator = testClassGenerator;
   }
 
   public File generateMockMvcTest(File file) throws Exception {
