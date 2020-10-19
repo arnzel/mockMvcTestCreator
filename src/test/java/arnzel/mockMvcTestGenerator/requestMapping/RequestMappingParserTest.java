@@ -3,7 +3,7 @@ package arnzel.mockMvcTestGenerator.requestMapping;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import fixtures.controllers.MethodMappingController;
+import fixtures.controllers.RequestMappingController;
 import fixtures.otherClasses.NonControllerClass;
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -24,7 +24,7 @@ class RequestMappingParserTest {
 
     // Run the test
     final Collection<Method> result = requestMappingParser.getMethodsAnnotatedWithRequestMapping(
-        MethodMappingController.class);
+        RequestMappingController.class);
 
     // Verify the results
     assertThat(result.size()).isEqualTo(1);

@@ -7,7 +7,7 @@ import static org.mockito.Mockito.mock;
 import arnzel.mockMvcTestGenerator.exceptions.IllegalClassException;
 import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
-import fixtures.controllers.MethodMappingController;
+import fixtures.controllers.RequestMappingController;
 import fixtures.otherClasses.NonControllerClass;
 import java.io.File;
 import java.io.IOException;
@@ -34,11 +34,11 @@ class MockMvcTestGeneratorClassTest {
   @Test
   void generateTestForMethodMapping() throws IOException {
     // given
-    File classGenerationFile = givenClassGeneration(MethodMappingController.class);
+    File classGenerationFile = givenClassGeneration(RequestMappingController.class);
 
     // when
     File testClassFile =
-        mockMvcTestGeneratorUnderTest.generateMockMvcTest(MethodMappingController.class);
+        mockMvcTestGeneratorUnderTest.generateMockMvcTest(RequestMappingController.class);
 
     // then
     assertThat(testClassFile).isEqualTo(classGenerationFile);

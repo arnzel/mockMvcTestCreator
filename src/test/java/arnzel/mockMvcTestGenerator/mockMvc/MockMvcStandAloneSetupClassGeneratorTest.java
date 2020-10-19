@@ -1,8 +1,7 @@
 package arnzel.mockMvcTestGenerator.mockMvc;
 
 import com.squareup.javapoet.TypeSpec;
-import fixtures.controllers.MethodMappingController;
-import org.assertj.core.api.Assertions;
+import fixtures.controllers.RequestMappingController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import util.JavaPoetUtil;
@@ -28,7 +27,7 @@ class MockMvcStandAloneSetupClassGeneratorTest {
 
         // Run the test
         final TypeSpec.Builder result = mockMvcStandAloneSetupClassGeneratorUnderTest
-                .createTestClass(MethodMappingController.class, "testClassName");
+                .createTestClass(RequestMappingController.class, "testClassName");
 
         // Verify the results
         String javaFile =

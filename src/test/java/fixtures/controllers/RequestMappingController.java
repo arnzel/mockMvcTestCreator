@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MethodMappingController {
+public class RequestMappingController {
 
   @RequestMapping(value="/controller", method=GET)
   public String getMapping() {

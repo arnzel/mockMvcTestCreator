@@ -3,8 +3,7 @@ package arnzel.mockMvcTestGenerator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import arnzel.mockMvcTestGenerator.ClassParser;
-import fixtures.controllers.MethodMappingController;
+import fixtures.controllers.RequestMappingController;
 import fixtures.otherClasses.NonControllerClass;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -26,7 +25,7 @@ class ClassParserTest {
     
     // Run the test
     final List<Method> result = classParserUnderTest.findAnnotatedMethods(
-        MethodMappingController.class, RequestMapping.class);
+        RequestMappingController.class, RequestMapping.class);
 
     // Verify the results
     assertThat(result.size()).isEqualTo(1);

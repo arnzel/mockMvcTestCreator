@@ -1,16 +1,16 @@
 package dummy;
 
-import fixtures.controllers.MethodMappingController;
+import fixtures.controllers.RequestMappingController;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 class testClassName {
   private final MockMvc mockMvc;
 
-  private final MethodMappingController methodMappingController;
+  private final RequestMappingController requestMappingController;
 
   public testClassName() {
-    this.methodMappingController = new MethodMappingController();
-    this.mockMvc = MockMvcBuilders.standaloneSetup(new MethodMappingController()).build();
+    this.requestMappingController = new RequestMappingController();
+    this.mockMvc = MockMvcBuilders.standaloneSetup(new RequestMappingController()).build();
   }
 }
