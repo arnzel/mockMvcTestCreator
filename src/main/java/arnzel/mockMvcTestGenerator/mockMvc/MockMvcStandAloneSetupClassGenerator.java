@@ -22,12 +22,6 @@ public class MockMvcStandAloneSetupClassGenerator implements MockMvcClassGenerat
 
   private final String MOCK_MVC_VARIABLE_NAME = "mockMvc";
 
-  private final String MOCK_MVC_BUILDERS_VARIABLE_NAME = "mockMvcBuilders";
-
-  private final String MOCK_MVC_REQUEST_BUILDERS_VARIABLE_NAME = "mockMvcRequestBuilders";
-
-  private final String MEDIA_TYPE_APPLICATION_JSON_VARIABLE_NAME = "mediaTypeApplicationJson";
-
   public TypeSpec.Builder createTestClass(Class clazz,String testClassName){
     return classBuilder(testClassName)
         .addField(getMockMvcFieldSpec())

@@ -6,13 +6,14 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import util.JavaPoetUtil;
 import util.ResourcesUtil;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static com.squareup.javapoet.TypeSpec.classBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
+import static util.JavaPoetUtil.createJavaFileWithField;
 import static util.ResourcesUtil.getResourceContent;
 
 
@@ -31,13 +32,7 @@ class FieldSpecUtilsTest {
 
     }
 
-    private String createJavaFileWithField(FieldSpec fieldSpec){
-        TypeSpec typeSpec =
-                classBuilder("Blub").addField(fieldSpec).build();
-        JavaFile javaFile = JavaFile.builder("dummy", typeSpec)
-                .build();
-        return javaFile.toString();
-    }
+
 
 
 }
