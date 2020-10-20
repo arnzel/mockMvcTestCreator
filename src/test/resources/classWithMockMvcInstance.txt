@@ -4,7 +4,7 @@ import fixtures.controllers.RequestMappingController;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-class testClassName {
+public class testClassName {
   private final MockMvc mockMvc;
 
   private final RequestMappingController requestMappingController;

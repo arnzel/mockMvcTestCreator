@@ -24,6 +24,7 @@ public class MockMvcStandAloneSetupClassGenerator implements MockMvcClassGenerat
 
   public TypeSpec.Builder createTestClass(Class clazz,String testClassName){
     return classBuilder(testClassName)
+            .addModifiers(Modifier.PUBLIC)
         .addField(getMockMvcFieldSpec())
         .addField(getControllerFieldSpec(clazz))
         .addMethod(getDefaultConstructorSpec(clazz));

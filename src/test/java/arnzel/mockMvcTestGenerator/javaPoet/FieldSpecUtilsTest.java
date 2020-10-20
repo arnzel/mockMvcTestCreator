@@ -12,6 +12,7 @@ import util.ResourcesUtil;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static arnzel.mockMvcTestGenerator.javaPoet.FieldSpecUtils.getPrivateFieldSpec;
 import static org.assertj.core.api.Assertions.assertThat;
 import static util.JavaPoetUtil.createJavaFileWithField;
 import static util.ResourcesUtil.getResourceContent;
@@ -23,7 +24,7 @@ class FieldSpecUtilsTest {
     void testGetPrivateFieldSpec() throws IOException, URISyntaxException {
 
         // Run the test
-        final FieldSpec result = FieldSpecUtils.getPrivateFieldSpec(Object.class, "classParser");
+        final FieldSpec result = getPrivateFieldSpec(Object.class, "classParser");
 
         // Verify the results
         String string = createJavaFileWithField(result);
