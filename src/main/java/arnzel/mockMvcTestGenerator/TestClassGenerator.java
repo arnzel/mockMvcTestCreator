@@ -17,11 +17,13 @@ public class TestClassGenerator {
   
   private final RequestMappingTestGenerator requestMappingTestGenerator;
   
-  public TestClassGenerator() {
-    this.testClassWriter = new TestClassWriter();
-    this.mockMvcClassGenerator = 
-        new MockMvcStandAloneSetupClassGenerator();
-    this.requestMappingTestGenerator = new RequestMappingTestGenerator();
+  public TestClassGenerator(TestClassWriter testClassWriter,
+                            MockMvcClassGenerator mockMvcClassGenerator,
+                            RequestMappingTestGenerator requestMappingTestGenerator) {
+    this.testClassWriter = testClassWriter;
+    this.mockMvcClassGenerator =
+            mockMvcClassGenerator;
+    this.requestMappingTestGenerator = requestMappingTestGenerator;
   }
   
   public File generateTestClass(Class clazz) {

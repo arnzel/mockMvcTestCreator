@@ -20,8 +20,6 @@ import org.mockito.Mockito;
 
 class MockMvcTestGeneratorClassTest {
 
-  private static final FileSystem FILE_SYSTEM = Jimfs.newFileSystem(Configuration.unix());
-
   private MockMvcTestGenerator mockMvcTestGeneratorUnderTest;
 
   private TestClassGenerator testClassGenerator = mock(TestClassGenerator.class);
