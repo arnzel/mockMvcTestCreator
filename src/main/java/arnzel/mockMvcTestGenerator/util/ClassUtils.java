@@ -2,20 +2,21 @@ package arnzel.mockMvcTestGenerator.util;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import net.openhft.compiler.CompilerUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 public class ClassUtils {
 
     public static Class getClassFromFile(File file) throws Exception {
-        URL url =file.toURI().toURL();
-        URLClassLoader loader = new URLClassLoader(new URL[] {url});
-        return loader.loadClass(getPackageName(file)
-                + "."
-                + getClassName(file));
+        String fullClassName = getPackageName(file) +"." + getClassName(file);
+        String fileContent = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+        return CompilerUtils.CACHED_COMPILER.loadFromJava(fullClassName,fileContent);
     }
 
     private static String getClassName(File file)  {
