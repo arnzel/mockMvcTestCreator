@@ -1,6 +1,7 @@
 package arnzel.mockMvcTestGenerator;
 
 import static com.squareup.javapoet.JavaFile.builder;
+import static java.lang.String.format;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
@@ -15,13 +16,13 @@ public class TestClassWriter {
     String testClassPackageName = getTestClassPackage(clazz);
     JavaFile javaFile = builder(testClassPackageName, testClassTypeSpec)
         .build();
-    File testClassFile = new File(TEST_CLASS_PATH);
+    File testClassPath = new File(TEST_CLASS_PATH);
     try {
-      javaFile.writeTo(testClassFile);
+      return javaFile.writeToPath(testClassPath.toPath()).toFile();
     } catch (IOException e) {
-      e.printStackTrace();
+      String error = format("Cannot write class '%s' to path '%s'",clazz.getName(),testClassPath.getPath());
+      throw new RuntimeException(error);
     }
-    return testClassFile;
   }
 
   String getTestClassPackage(Class clazz){
